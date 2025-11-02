@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>자동 재생 MP3</title>
+</head>
+<body>
+  <h1>자동 재생 오디오 테스트</h1>
+
+  <!-- 오디오 재생 (컨트롤러 숨김, 반복, 자동 시작) -->
+  <audio id="bgAudio" loop>
+    <source src="https://hyunsworks.github.io/vr/Busy_City-TrackTribe.mp3" type="audio/mpeg">
+    브라우저가 audio 태그를 지원하지 않습니다.
+  </audio>
+
+  <script>
+    // 페이지 로드 후 브라우저 자동 재생 정책 우회
+    window.addEventListener('load', function() {
+      const audio = document.getElementById('bgAudio');
+
+      // 음소거 상태에서 재생 시도 → 대부분 브라우저에서 자동 재생 허용
+      audio.muted = true;
+      audio.play().then(() => {
+        // 성공하면 음소거 해제
+        audio.muted = false;
+      }).catch(err => {
+        console.log('자동 재생 실패, 사용자의 클릭 필요:', err);
+      });
+    });
+  </script>
+</body>
+</html>
